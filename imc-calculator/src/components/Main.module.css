@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+}
+
+.container h1 {
+  font-size: 40px;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-around;
+  margin: 15px 0;
+}
+
+.cards p {
+  width: 45%;
+  text-align: justify;
+  box-shadow: 1px 3px 10px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  border-radius: 10px;
+  font-weight: 400;
+}
+
+.callAction {
+  padding-bottom: 40px;
+}
+
+.callAction p {
+  box-shadow: 1px 3px 10px 1px rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  border-radius: 10px;
+  font-weight: 400;
+}
+
+.callAction h4 {
+  padding: 40px 0;
+  font-size: 20px;
+}
