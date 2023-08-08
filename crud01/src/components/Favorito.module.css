@@ -1,0 +1,16 @@
+.Container {
+  height: 30px;
+}
+.Container ul {
+  display: flex;
+  justify-content: first;
+  align-items: center;
+  gap: 30px;
+  height: 100%;
+  padding: 0 30px;
+}
+
+.Container ul li {
+  list-style: none;
+  font-size: 10px;
+}
