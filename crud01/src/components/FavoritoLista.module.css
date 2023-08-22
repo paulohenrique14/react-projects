@@ -1,0 +1,16 @@
+.container{
+    border-radius:15px;
+    display: flex;
+    gap:10px;
+    align-items: center;
+    padding:5px 5px;
+}
+
+.container:hover{
+    background-color:rgb(240, 239, 239);
+    transition: all .9s ease;
+}
+
+.image{
+    width:15px;
+}
