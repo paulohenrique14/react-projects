@@ -1,4 +1,5 @@
 import "./App.css";
+import Container from "./components/Container";
 import Email from "./components/Email";
 import Favorito from "./components/Favorito";
 
@@ -7,6 +8,7 @@ function App() {
     <div className="Container">
       <Favorito />
       <Email />
+      <Container />
     </div>
   );
 }
