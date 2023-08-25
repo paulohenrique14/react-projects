@@ -5,7 +5,12 @@ import Section2Component from './Section2Component'
 const Section2 = () => {
   return (
     <div className={styles.Container}>
-    <Section2Component logo="youtube" site="Youtube"/> 
+    <Section2Component logo ={"youtube"} site="Youtube"/> 
+    <Section2Component logo ={"youtube"} site="Youtube"/> 
+    <Section2Component logo ={"youtube"} site="Youtube"/> 
+    <Section2Component logo ={"youtube"} site="Youtube"/> 
+    <Section2Component logo ={"youtube"} site="Youtube"/> 
+    <Section2Component logo ={"youtube"} site="Youtube"/> 
     </div>
   )
 }
