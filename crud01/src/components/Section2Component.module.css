@@ -1,12 +1,13 @@
 .Container{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border:2px solid black;
+    justify-content:center;
+    align-items:center;
+    border:2px solid rgb(0, 0, 0);
     gap:5px;
     padding:15px 24px;
     border-radius:5px;
+    box-sizing: border-box;
 }
 
 .Container:hover{

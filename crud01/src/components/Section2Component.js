@@ -7,7 +7,6 @@ const Section2Component = ({logo, site}) => {
       <div className={styles.imgContent}>
         <img src={"/imgs/"+logo+".svg"} alt="" className={styles.image}/>
       </div>
-    
     <p>{site}</p>
     </div>
   )

@@ -4,6 +4,7 @@ const Section1 = () => {
   return (
     <div className={styles.container}>
         <img src="/imgs/youtube.png" alt="" />
+        <div className={styles.search}></div>
     </div>
   )
 }

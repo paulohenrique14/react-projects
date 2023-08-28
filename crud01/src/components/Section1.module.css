@@ -4,11 +4,24 @@
     display:flex;
     justify-content: center;
     align-items: center;
+    height:150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom:5px;
+
 
 }
 
 .Container img{
     width:500;
     height:100px;
+}
+
+.search{
+    height:37px;
+    width:100%;
+    background-color: #dddada;
+    border-radius:30px;
 }
 
