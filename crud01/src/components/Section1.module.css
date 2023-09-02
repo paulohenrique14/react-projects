@@ -1,6 +1,5 @@
 .container{
-    border:2px solid red;
-    width:500px;
+    width:505px;
     display:flex;
     justify-content: center;
     align-items: center;
@@ -9,17 +8,16 @@
     flex-direction: column;
     justify-content: space-between;
     padding-bottom:5px;
-
-
 }
 
-.Container img{
-    width:500;
+.container img{
+    width:45%;
     height:100px;
+
 }
 
 .search{
-    height:37px;
+    height:43px;
     width:100%;
     background-color: #dddada;
     border-radius:30px;
@@ -28,6 +26,19 @@
     justify-content: space-between;
     padding:5px;
     box-sizing: border-box;
-
 }
 
+.search p{
+    margin:0px 8px;
+}
+
+.ico{
+    font-size: 15px;
+}
+
+.searchText{
+    width:390px;
+    font-size:13.5px;
+    font-weight:lighter;
+    color:#bbb6b6
+}

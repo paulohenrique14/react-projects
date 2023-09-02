@@ -11,6 +11,10 @@ const Section2 = () => {
     <Section2Component logo ={"youtube"} site="Youtube"/> 
     <Section2Component logo ={"youtube"} site="Youtube"/> 
     <Section2Component logo ={"youtube"} site="Youtube"/> 
+    <Section2Component logo ={"youtube"} site="Youtube"/>
+    <Section2Component logo ={"youtube"} site="Youtube"/>
+    <Section2Component logo ={"youtube"} site="Youtube"/>
+    <Section2Component logo ={"youtube"} site="Youtube"/>
     </div>
   )
 }
