@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 import { useEffect } from "react";
 
 const firebaseConfig = {
@@ -10,14 +11,9 @@ const firebaseConfig = {
   messagingSenderId: "896530435301",
   appId: "1:896530435301:web:7208cf22b7698454ce580c"
 };
-console.log('ue')
+
 const app = initializeApp(firebaseConfig);
 
-
-useEffect(() => {
-  const db = getFirestore(app)
-}, [app])
-
-
+const db = getFirestore(app);
 
 export { db }

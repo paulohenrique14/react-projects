@@ -1,3 +1,4 @@
+import { db } from '../firebase/config'
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -7,6 +8,7 @@ import {
 } from 'firebase/auth';
 
 import {useState, useEffect} from 'react'
+import { Navigate } from 'react-router-dom';
 
 export const useAuthentication = () => {
     const [authError, setAuthError] = useState(null);
@@ -19,6 +21,12 @@ export const useAuthentication = () => {
         if (cancelled) {
             return;
         }
+    }
+
+    const logout = () => {
+        checkIfIsCancelled();
+
+        signOut(auth)
     }
 
     const createUser = async (data) => {
@@ -38,12 +46,54 @@ export const useAuthentication = () => {
             });
             
         } catch (error) {
+
+            let systemErrorMessage;
             console.log(error.message)
-            setAuthError(error)
+            if (error.message.includes('Passowrd')){
+                systemErrorMessage = 'A senha precisa conter pelo menos 6 dígitos!'
+            }else if (error.message.includes('email')){
+                systemErrorMessage = 'Email invalido, favor verificar!'
+            }else{
+                systemErrorMessage = 'Ocorreu um erro. Tente novamente'
+            }
+            
+            setAuthError(msgError)
         }
 
         setLoading(false);
     };
+
+    const MudaLugar = (route) =>{
+        <Navigate to = {route}/>
+    }
+
+    const login = async(data) => {
+        checkIfIsCancelled();
+
+        setLoading(true);
+        setAuthError(false);
+
+        try {
+            await signInWithEmailAndPassword(auth, data.email, data.password);
+
+            setLoading(false)
+            MudaLugar('/');
+            
+        } catch (error) {
+            let systemErrorMessage;
+
+            if (error.message.includes('auth/invalid-credential')){
+                systemErrorMessage = 'Senha ou usuário incorreto. Favor verificar';
+            } else{
+                systemErrorMessage = 'Ocorreu um erro. Tente novamente.'
+            }
+            
+            console.log('system error message: '+systemErrorMessage)
+
+            setError(systemErrorMessage)
+            setLoading(false)   
+        }
+    }
 
     useEffect(() => {
         return () => setCancelled(true);
@@ -53,7 +103,9 @@ export const useAuthentication = () => {
     auth,
     createUser,
     authError,
-    loading
+    loading,
+    logout,
+    login
    }
 
 }
