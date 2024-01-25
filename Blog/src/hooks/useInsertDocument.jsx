@@ -8,25 +8,58 @@ const initalState = {
 }
 
 const insertReducer = (state, action) => {
-
+    switch(action.type) {
+        case "LOADING":  
+            return {loading: true, error: null}
+        case "INSERTED_DOC":
+            return {loading: false, error: null}
+        case 'ERROR':
+            return {loading: false, error: action.payload}
+        default:
+            return state;
+    }
 };
 
 export const useInsertDocument = (docCollection) => {
     const [response, dispatch] = useReducer(insertReducer, initalState)
-}
 
-const [cancelled, setCancelled] = useState(false)
+    const [cancelled, setCancelled] = useState(false)
 
-const checkCancelBeforeDispatch = (action) => {
-    if (!cancelled) {
-        dispatch(action);
+    const checkCancelBeforeDispatch = (action) => {
+        if (!cancelled) {
+            dispatch(action);
+        };
     };
-};
 
-const useInsertDocument = async(document) => {
-    try {
-        
-    } catch (error) {
-        
+    const insertDocument = async(document) => {
+        try {
+            const newDocument = {...document, createdAt: Timestamp.now()}   
+    
+            const insertedDocument = await addDoc(
+                collection(db, docCollection),
+                newDocument
+            );
+    
+        } catch (error) {
+            checkCancelBeforeDispatch({
+                type: 'ERROR',
+                payload: error.message
+            });
+
+            console.log(error)
+            console.log(error.message)
+        }
     }
+
+    useEffect(() =>{
+        setCancelled(true)
+    }, [])
+
+    return { insertDocument, response }
+
 }
+
+
+
+
+

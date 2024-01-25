@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <div className={styles.navbarContainer}>
-        <NavLink to = {'/'} className={styles.navbarHeader}>Blog dos <span>tinhosos</span></NavLink>
+        <NavLink to = {'/'} className={styles.navbarHeader}>Blog dos <span>chegados</span></NavLink>
         <ul>
             <li>
                 <NavLink to = {'/'}>Home</NavLink>

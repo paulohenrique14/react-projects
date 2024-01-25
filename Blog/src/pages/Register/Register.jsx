@@ -38,6 +38,7 @@ const Register = () => {
             console.log(authError)
         }
     }, [authError])
+    
   return (
     <div>
         <h1>Cadastre-se para postar</h1>

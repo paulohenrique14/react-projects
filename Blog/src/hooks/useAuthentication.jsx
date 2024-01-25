@@ -90,7 +90,7 @@ export const useAuthentication = () => {
             
             console.log('system error message: '+systemErrorMessage)
 
-            setError(systemErrorMessage)
+            setAuthError(systemErrorMessage)
             setLoading(false)   
         }
     }
