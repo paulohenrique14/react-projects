@@ -14,21 +14,63 @@ const CreatePost = () => {
 
   const [user] = useAuthValue()
   const {insertDocument, response} = useInsertDocument('posts');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
 
+    let errorMessage = '';
+
+    //zerar erros
+
+    setFormError(errorMessage)
+
+    //Validar url da imagem
+    try {
+      let url = new URL(image)
+      console.log('url valida')
+    } catch (error) {
+      errorMessage = 'URL Invalida'
+      
+    }
+
+    //criar o array de tags
+
+    let tagsArr = tags.split(',').map((tag) => tag.toLowerCase().trim());
+
+    console.log(tagsArr)
+
+    //validar restante
+
+    if (!title || !image || !body || !tags) {
+      errorMessage = 'Favor preencha todos os dados corretamente.'
+    }
+
+    if (errorMessage !== '') {
+      setFormError(errorMessage);
+      return;
+      
+    }
 
     insertDocument({
       title,
       image,
       body,
-      tags, 
+      tagsArr, 
       uid: user.uid,
       createdBy: user.displayName
     })
+
+    console.log('dados inseridos corretamente')
+    navigate('/')
   }
+
+  useEffect(() => {
+    if (response.error) {
+      setFormError(response.error)
+      console.log(formError)
+    }
+  }, [response.error])
 
 
   return (
@@ -78,14 +120,17 @@ const CreatePost = () => {
               type="text" 
               name='image' 
               required 
-              placeholder='Tags das imagens' 
+              placeholder='Tags das imagens (divida as tags por vírgula)' 
               onChange={(e) => setTags(e.target.value)} 
               value={tags}
             />
           </label>
           <button className='btn'>Cadastrar</button>
             {response.error && 
-            <p className='error'>{response.error}</p>
+              <p className='error'>{response.error}</p>
+            }
+            {formError && 
+              <p className='error'>{formError}</p>
             }
         </form>
     </div>
