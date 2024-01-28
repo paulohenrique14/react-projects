@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
-
+import styles from "./Home.module.css"
 const Home = () => {
   
   const [query, setQuery] = useState('');
@@ -13,11 +13,6 @@ const Home = () => {
 
     getPosts();
   }
-
-  // useEffect(() => {
-  //   console.log('posts quentes do forno')
-  //   console.log(post)
-  // }, [post])
 
   return (
     <div>
@@ -34,11 +29,19 @@ const Home = () => {
             <button>Seja o criador do primeiro!</button>
           </div>
         }
-        {post && post.length >0 &&
-          post.map((teste) => (
-            <li key={teste.id}>{teste.createdBy}</li>
+        <div className={styles.postContainer}>
+          {post && post.length >0 &&
+          post.map((post) => (
+            <div className={styles.postsContent}>
+              <h1>{post.title}</h1>
+              <img src={post.image} alt="" />
+              <p>{post.body}</p>
+              <span>{post.createdBy}</span>
+              {/* <p>{post.tagsArr}</p> */}
+            </div>
           ))
         }
+        </div>
     </div>
   )
 }

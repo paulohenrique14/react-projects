@@ -1,0 +1,28 @@
+.postContainer{
+    display: flex;
+    gap:30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding:10px 100px;
+
+}
+
+
+
+.postsContent{
+    border:3px solid rgb(0, 0, 0);
+    border-radius: 3px;
+    width:25%;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+
+.postContainer img{
+    width:320px;
+    height: 200px;
+    border-radius: 3px;
+}
