@@ -4,37 +4,51 @@ import { db } from '../../firebase/config'
 import { useAuthValue } from '../../context/AuthContext'
 import { getDocs } from 'firebase/firestore'
 import { useState } from 'react'
+import styles from './Dashboard.module.css'
+import { useFetchDocuments } from '../../hooks/useFetchDocuments'
 
 const Dashboard = () => {
   const postRef = collection(db, "posts")
   const [user] = useAuthValue();
-  const [queryResult, setQueryResult] = useState([]);
-
-  const handleSubmit = async() => {
-    const q = query(postRef, where("uid", "==", user.uid))
-    console.log(q)
-
-    const data = await getDocs(q);
-
-    setQueryResult(data.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-    console.log(data.docs.map(doc => ({ id: doc.id, ...doc.data() })))
-    // console.log(queryResult.length)
-  }
+  const [noPost, setNoPost] = useState(false);
+  const { queryResult, getFilteredPosts} = useFetchDocuments('posts');
 
   useEffect(() => {
-    console.log(queryResult.length)
-  }, [queryResult])
+    const showData = async() => {
+      await getFilteredPosts({ dbColumnName: 'uid', comparisonOperator: '==', value: user.uid });
+      setNoPost(false)
+    }
+
+    showData();
+
+    
+
+    if (queryResult.length == 0) {
+      setNoPost(true)
+    }
+
+  }, [])
+
   return (
     <div>
-        <h1>Gerencie aqui suas postagens</h1>
-        <button onClick={handleSubmit}>teste</button>
-        {queryResult.length > 0 && 
-          queryResult.map((doc) => {
-            <>    
-              <p key={doc.id}>{doc.image}</p>
-            </>
-          })
-        }
+        <h1>Gerencie aqui suas postagens!</h1>
+
+        <div className={styles.postContainer}>
+          {queryResult.length > 0 && 
+            queryResult.map((doc) => (
+              <div key={doc.id} className={styles.postsContent}>   
+                <h1>{doc.title}</h1>
+                <img src={doc.image} alt="" />
+                <p>{doc.body}</p>
+              </div>
+            ))
+          }
+          {noPost && 
+          <div>
+            <h2>Você não postou nada :(</h2>
+          </div>
+          }
+        </div>
     </div>
   )
 }
