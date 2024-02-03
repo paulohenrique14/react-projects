@@ -1,32 +1,17 @@
-import React, { useEffect } from 'react'
-import {collection, query, where } from 'firebase/firestore'
-import { db } from '../../firebase/config'
+import { useEffect } from 'react'
+import {collection } from 'firebase/firestore'
 import { useAuthValue } from '../../context/AuthContext'
-import { getDocs } from 'firebase/firestore'
 import { useState } from 'react'
 import styles from './Dashboard.module.css'
+import { db } from '../../firebase/config'
 import { useFetchDocuments } from '../../hooks/useFetchDocuments'
 
 const Dashboard = () => {
-  const postRef = collection(db, "posts")
   const [user] = useAuthValue();
-  const [noPost, setNoPost] = useState(false);
-  const { queryResult, getFilteredPosts} = useFetchDocuments('posts');
+  const {getPosts, post: posts, error, loading} = useFetchDocuments('posts');
 
   useEffect(() => {
-    const showData = async() => {
-      await getFilteredPosts({ dbColumnName: 'uid', comparisonOperator: '==', value: user.uid });
-      setNoPost(false)
-    }
-
-    showData();
-
-    
-
-    if (queryResult.length == 0) {
-      setNoPost(true)
-    }
-
+    getPosts('uid', '==', user.uid)
   }, [])
 
   return (
@@ -34,8 +19,9 @@ const Dashboard = () => {
         <h1>Gerencie aqui suas postagens!</h1>
 
         <div className={styles.postContainer}>
-          {queryResult.length > 0 && 
-            queryResult.map((doc) => (
+
+          {posts.length > 0 && 
+            posts.map((doc) => (
               <div key={doc.id} className={styles.postsContent}>   
                 <h1>{doc.title}</h1>
                 <img src={doc.image} alt="" />
@@ -43,11 +29,19 @@ const Dashboard = () => {
               </div>
             ))
           }
-          {noPost && 
+
+          {loading &&
+            <div>
+              <p>Carregando...</p>
+            </div>
+          }
+
+          {!loading && posts.length == 0  && 
           <div>
             <h2>Você não postou nada :(</h2>
           </div>
           }
+
         </div>
     </div>
   )

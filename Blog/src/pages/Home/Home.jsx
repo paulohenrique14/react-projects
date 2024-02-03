@@ -6,19 +6,15 @@ import { useAuthValue } from '../../context/AuthContext'
 const Home = () => {
   
   const [query, setQuery] = useState('');
-  const {getPosts, post: posts, queryResult, getFilteredPosts} = useFetchDocuments('posts');
+  const {getPosts, post: posts, error, loading} = useFetchDocuments('posts');
   const [user] = useAuthValue();
-  const [fromSearch, setFromSearch] = useState(false)
   // const [posts] = useState([])
 
   const handleSubmit = async(e) => {
     e.preventDefault();
 
-    setFromSearch(false);
-
-    await getFilteredPosts({ dbColumnName: 'tagsArr', comparisonOperator: 'array-contains', value: query });
+     getPosts('tagsArr', 'array-contains', query)
     
-    setFromSearch(true);
   }
 
   useEffect(() => {
@@ -39,35 +35,28 @@ const Home = () => {
           <button>Pesquisar</button>
         </form>
 
-        <h1>Posts...</h1>
+        <h2>Posts...</h2>
 
-        {posts && posts.length == 0 &&
+        {posts && posts.length == 0 && !loading &&
           <div>
             <p>Não foi achado nenhum post</p>
             <button>Seja o criador do primeiro!</button>
           </div>
         }
 
-        {queryResult && queryResult.length == 0 && fromSearch &&
+        {loading && 
+          <>
+            <h1>Carregando...</h1>
+          </>
+        }
+        {error && 
           <div>
-            <p>Não foi achado nenhum post com a tag <b>{query}</b></p>
-            <button>Seja o criador do primeiro!</button>
+            <p>erro! {error}</p>
           </div>
         }
 
         <div className={styles.postContainer}>
-          {queryResult.length > 0 &&
-            queryResult.map((post) => (
-              <div className={styles.postsContent} key={post.id}>
-                <h1>{post.title}</h1>
-                <img src={post.image} alt="" />
-                <p>{post.body}</p>
-                <span>{post.createdBy}</span>
-                {/* <p>{post.tagsArr}</p> */}
-              </div>
-            ))
-          }
-          {posts && posts.length > 0 && !fromSearch &&
+          {posts && posts.length > 0  && !loading &&
             posts.map((post) => (
               <div className={styles.postsContent} key={post.id}>
                 <h1>{post.title}</h1>
