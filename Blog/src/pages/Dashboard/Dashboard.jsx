@@ -5,6 +5,7 @@ import { useState } from 'react'
 import styles from './Dashboard.module.css'
 import { db } from '../../firebase/config'
 import { useFetchDocuments } from '../../hooks/useFetchDocuments'
+import Post from '../../components/Post'
 
 const Dashboard = () => {
   const [user] = useAuthValue();
@@ -21,12 +22,8 @@ const Dashboard = () => {
         <div className={styles.postContainer}>
 
           {posts.length > 0 && 
-            posts.map((doc) => (
-              <div key={doc.id} className={styles.postsContent}>   
-                <h1>{doc.title}</h1>
-                <img src={doc.image} alt="" />
-                <p>{doc.body}</p>
-              </div>
+            posts.map((post) => (
+              <Post post={post}/>
             ))
           }
 

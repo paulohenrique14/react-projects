@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 import styles from "./Home.module.css"
 import { useAuthValue } from '../../context/AuthContext'
+import Post from '../../components/Post';
 const Home = () => {
   
   const [query, setQuery] = useState('');
@@ -58,13 +59,7 @@ const Home = () => {
         <div className={styles.postContainer}>
           {posts && posts.length > 0  && !loading &&
             posts.map((post) => (
-              <div className={styles.postsContent} key={post.id}>
-                <h1>{post.title}</h1>
-                <img src={post.image} alt="" />
-                <p>{post.body}</p>
-                <span>{post.createdBy}</span>
-                {/* <p>{post.tagsArr}</p> */}
-              </div>
+              <Post post={post}/>
             ))
           }
         </div>
