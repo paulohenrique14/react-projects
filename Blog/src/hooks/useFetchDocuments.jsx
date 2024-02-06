@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getDocs, collection, query, where } from "firebase/firestore";
+import { getDocs, collection, query, where, orderBy } from "firebase/firestore";
 import { db } from "../firebase/config";
 
 export const useFetchDocuments = (docCollection) => {
@@ -16,16 +16,20 @@ export const useFetchDocuments = (docCollection) => {
             setError('')
 
             let data;
+            let q;
 
             if (fieldName !== null && operator !== null && value !== null) {
 
-                const q    = query(fetchedPost, where(fieldName, operator, value))
-                data = await getDocs(q);   
+                q  = query(fetchedPost, where(fieldName, operator, value)) 
+
 
             }else{
-                data = await getDocs(fetchedPost);
+
+                q = query(fetchedPost, orderBy('createdAt', 'desc'))
 
             }
+
+            data = await getDocs(q);
             
             setPost(data.docs.map((doc) => ({...doc.data(), id: doc.id}))) 
             setLoading(false)

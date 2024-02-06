@@ -12,6 +12,8 @@ import CreatePost from './pages/CreatePost/CreatePost'
 import Dashboard from './pages/Dashboard/Dashboard'
 import Login from './pages/Login/Login'
 import { Navigate } from 'react-router-dom'
+import Search from './components/Search'
+import ReadPost from './pages/ReadPost/ReadPost'
 
 function App() {
 
@@ -45,6 +47,8 @@ function App() {
               <Route path = '/login' element={!userVerification ? <Login/> : <Navigate to = '/'/>}/>
               <Route path = '/post/createpost' element={userVerification ? <CreatePost/> : <Navigate to = '/'/>}/>
               <Route path = '/dashboard' element={userVerification ? <Dashboard/> : <Navigate to = '/'/>}/>
+              <Route path = '/post/search' element={<Search />}/>
+              <Route path = '/post' element = {<ReadPost />} />
             </Routes>
           </AuthProvider>
         </BrowserRouter>

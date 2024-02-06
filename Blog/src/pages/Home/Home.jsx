@@ -1,20 +1,25 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
+import { useNavigate } from 'react-router-dom';
 import styles from "./Home.module.css"
 import { useAuthValue } from '../../context/AuthContext'
 import Post from '../../components/Post';
 const Home = () => {
   
-  const [query, setQuery] = useState('');
+  const [query, setQuery]                       = useState('');
   const {getPosts, post: posts, error, loading} = useFetchDocuments('posts');
-  const [user] = useAuthValue();
-  // const [posts] = useState([])
+  const [user]                                  = useAuthValue();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
 
-     getPosts('tagsArr', 'array-contains', query)
+    
+    navigate('/post/search/?q='+ query)
+
+    // getPosts('tagsArr', 'array-contains', query)
     
   }
 
@@ -59,7 +64,7 @@ const Home = () => {
         <div className={styles.postContainer}>
           {posts && posts.length > 0  && !loading &&
             posts.map((post) => (
-              <Post post={post}/>
+              <Post key={post.id} post={post}/>
             ))
           }
         </div>
