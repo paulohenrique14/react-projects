@@ -23,7 +23,7 @@ const Dashboard = () => {
 
           {posts.length > 0 && 
             posts.map((post) => (
-              <Post post={post}/>
+              <Post post={post} myPost={true}/>
             ))
           }
 

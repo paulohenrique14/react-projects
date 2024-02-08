@@ -14,6 +14,7 @@ import Login from './pages/Login/Login'
 import { Navigate } from 'react-router-dom'
 import Search from './components/Search'
 import ReadPost from './pages/ReadPost/ReadPost'
+import EditPost from './pages/EditPost/EditPost'
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
               <Route path = '/dashboard' element={userVerification ? <Dashboard/> : <Navigate to = '/'/>}/>
               <Route path = '/post/search' element={<Search />}/>
               <Route path = '/post' element = {<ReadPost />} />
+              <Route path = '/post/edit' element = {<EditPost/>}/>
             </Routes>
           </AuthProvider>
         </BrowserRouter>

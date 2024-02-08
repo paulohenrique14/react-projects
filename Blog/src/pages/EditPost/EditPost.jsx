@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
-
 import { useQuery } from '../../hooks/useQuery'
-
-import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 import Post from '../../components/Post';
+import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 
-const ReadPost = () => {
+const EditPost = () => {
 
     const {getPosts, loading, error, post: posts} = useFetchDocuments('posts')
 
@@ -15,19 +13,20 @@ const ReadPost = () => {
 
     useEffect(() => {
         getPosts('id', '==', search)
-    }, [search])
-
+        console.log(posts.length)
+    },[])
   return (
     <div>
-        <h2>Post</h2>
-        <p>{search}</p>
-        {posts && posts.length > 0 &&
+        <h1>Edite o post</h1>
+        <p>Teste</p>
+        {posts &&
             posts.map((post) => (
-                <Post post = {post} key={post.id}/>
+                <Post post={post} key={post.id}/>
+                
             ))
         }
     </div>
   )
 }
 
-export default ReadPost
+export default EditPost

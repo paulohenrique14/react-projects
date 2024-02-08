@@ -4,13 +4,17 @@ import { useNavigate } from 'react-router-dom'
 
 
 
-const Post = ({post}) => {
+const Post = ({post, myPost = null}) => {
 
   const navigate = useNavigate();
 
   const handleSinglePost = () => {
 
-    navigate('/post/?q='+post.id);
+    navigate('/post/?q=' + post.id);
+  }
+
+  const handleEditPost = () => {
+    navigate('/post/edit/?q=' + post.id)
   }
   return (
     <div className={styles.postContainer}>
@@ -21,6 +25,10 @@ const Post = ({post}) => {
             <span key={tag}>#{tag}</span>
         ))}
         <button onClick={handleSinglePost}>Ler post</button>
+        {myPost &&
+          <button onClick={handleEditPost}>Editar post</button>
+
+        }
     </div>
   )
 }
