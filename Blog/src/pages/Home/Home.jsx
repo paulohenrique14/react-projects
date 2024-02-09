@@ -17,7 +17,7 @@ const Home = () => {
     e.preventDefault();
 
     
-    navigate('/post/search/?q='+ query)
+    navigate('/post/search/?q='+ query)    //leva ao componente search. está assim porque está sem css
 
     // getPosts('tagsArr', 'array-contains', query)
     

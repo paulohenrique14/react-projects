@@ -33,6 +33,7 @@ export const useFetchDocuments = (docCollection) => {
             
             setPost(data.docs.map((doc) => ({...doc.data(), id: doc.id}))) 
             setLoading(false)
+            
         } catch (error) {  
             setError(error)
             setLoading(false) 
