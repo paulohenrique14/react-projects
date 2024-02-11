@@ -9,12 +9,10 @@ export const useEdit = (docCollection) => {
 
     const editedPost = collection(db, docCollection)
 
-
-
     const editPost = async(id, data) => {
 
         try {
-            const docRef = await doc(editedPost, id) 
+            const docRef = doc(editedPost, id) 
             //pega qual post que é {o data vem por parametro da chamada da funcao}
             //editedPost é onde mostra o banco e a tabela que é
 

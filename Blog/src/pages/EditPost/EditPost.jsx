@@ -72,12 +72,7 @@ const EditPost = () => {
             tagsArr
         };
 
-
        editPost(posts[0].id, data) 
-
-
-
-
     }
 
   return (
@@ -133,7 +128,7 @@ const EditPost = () => {
 
                         <button>Salvar alterações</button>
                         {errorMessage &&
-                            <p>Erro! {errorMessage}</p>
+                            <p>{errorMessage}</p>
                         }
                         
                     </form>

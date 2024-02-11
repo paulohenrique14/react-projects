@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './Post.module.css'
 import { useNavigate } from 'react-router-dom'
+import { useDeletePost } from '../hooks/useDeletePost'
 
 
 
@@ -8,14 +9,22 @@ const Post = ({post, myPost = null}) => {
 
   const navigate = useNavigate();
 
-  const handleSinglePost = () => {
+  const {deletePost} = useDeletePost('posts')
 
+  const handleSinglePost = () => {
     navigate('/post/?q=' + post.id);
   }
 
   const handleEditPost = () => {
     navigate('/post/edit/?q=' + post.id)
   }
+
+  const handleDelete = () => {
+    deletePost(post.id)
+
+  }
+
+
   return (
     <div className={styles.postContainer}>
         <img src={post.image} alt={post.title} />
@@ -26,9 +35,12 @@ const Post = ({post, myPost = null}) => {
         ))}
         <button onClick={handleSinglePost}>Ler post</button>
         {myPost &&
-          <button onClick={handleEditPost}>Editar post</button>
-
+          <div>
+            <button onClick={handleEditPost}>Editar post</button>
+            <button onClick={handleDelete}>Deletar post</button>
+          </div>
         }
+
     </div>
   )
 }

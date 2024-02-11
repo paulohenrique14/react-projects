@@ -58,7 +58,7 @@ const Game = ({ gameOver, pickedWord, pickedCategory, guesses, score, guessedLet
     </div>
     <p className="guesses">
         <span>Tentativas: {guesses}</span>
-      </p>
+    </p>
     </div>
   );
 };
