@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useAuthentication } from '../../hooks/useAuthentication';
+import styles from './Register.module.css'
 
 const Register = () => {
     const [displayName, setDisplayName]         = useState('');
@@ -41,8 +42,11 @@ const Register = () => {
     
   return (
     <div>
-        <h1>Cadastre-se para postar</h1>
-        <p><b>Compartilhe</b> suas histórias conosco!</p>
+        <div className='headerComponents'>
+            <h1>Cadastre-se para postar</h1>
+            <p><b>Compartilhe</b> suas histórias conosco!</p>
+        </div>
+
         <br />
         <form onSubmit={handleSubmit}>
             <label>
@@ -51,7 +55,7 @@ const Register = () => {
                     type="text" 
                     required 
                     name='displayName' 
-                    placeholder='Nome do usuário'
+                    placeholder='O Mestre dos Apelidos'
                     value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
                 />
@@ -63,7 +67,7 @@ const Register = () => {
                     type="email" 
                     required 
                     name='email' 
-                    placeholder='Email do usuário'
+                    placeholder='SeuEmailDaSorte@chocolates.com'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}    
                 />
@@ -75,7 +79,7 @@ const Register = () => {
                     type="password"
                     required 
                     name='password' 
-                    placeholder='Insira sua senha'
+                    placeholder='SegredoDoCofreDoTesouro'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
@@ -87,7 +91,7 @@ const Register = () => {
                     type="password"
                     required 
                     name='confirmPassword' 
-                    placeholder='Repita sua senha'
+                    placeholder='Repita, por favor'
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />

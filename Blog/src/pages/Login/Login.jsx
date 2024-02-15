@@ -35,8 +35,10 @@ const Login = () => {
 
   return (
     <div>
-        <h1>Login</h1>
-        <p>Entre na sua conta e compartilhe suas histórias tinhosas!</p>
+        <div className="headerComponents">
+          <h1>Login</h1>
+          <p>Entre na sua conta e compartilhe suas histórias tinhosas!</p>
+        </div>
         
         <form onSubmit={handleSubmit}>
             <label>
@@ -65,9 +67,9 @@ const Login = () => {
             <br />
             <br />
             <button className='btn'>Logar</button>
-            {/* {error && 
+            {error && 
             <p className='error'>{error}</p>
-            } */}
+            }
         </form>
     </div>
   )

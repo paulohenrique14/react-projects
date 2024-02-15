@@ -11,31 +11,31 @@ const Navbar = () => {
 
   return (
     <div className={styles.navbarContainer}>
-        <NavLink to = {'/'} className={styles.navbarHeader}>Blog dos <span>chegados</span></NavLink>
+        <NavLink to = {'/'} className={styles.navbarHeader}>Mini <span className={styles.spanNavbar}>blog</span></NavLink>
         <ul>
             <li>
-                <NavLink to = {'/'}>Home</NavLink>
+                <NavLink to = {'/'} className={({isActive}) => (isActive ? 'Ativo' : 'NaoAtivo')}>Home</NavLink>
             </li>
             <li>
-                <NavLink to = {'/about'}>About us</NavLink>
+                <NavLink to = {'/about'} className={({isActive}) => (isActive ? 'Ativo' : 'NaoAtivo')}>About us</NavLink>
             </li>
             {!user &&
                 <>
                     <li>
-                        <NavLink to = {'/login'}>Login</NavLink>
+                        <NavLink to = {'/login'} className={({isActive}) => (isActive ? 'Ativo' : 'NaoAtivo')}>Login</NavLink>
                     </li>
                     <li>
-                       <NavLink to = {'/register'}>Register</NavLink>
+                       <NavLink to = {'/register'} className={({isActive}) => (isActive ? 'Ativo' : 'NaoAtivo')}>Register</NavLink>
                     </li>
                 </>
             }
             {user &&
                 <>
                     <li>
-                        <NavLink to = {'/post/createpost'}>Post</NavLink>
+                        <NavLink to = {'/post/createpost'} className={({isActive}) => (isActive ? 'Ativo' : 'NaoAtivo')}>Post</NavLink>
                     </li>
                     <li>
-                        <NavLink to = {'/dashboard'}>My posts</NavLink>
+                        <NavLink to = {'/dashboard'} className={({isActive}) => (isActive ? 'Ativo' : 'NaoAtivo')}>My posts</NavLink>
                     </li>
                     <li>
                         <button onClick={logout}>Sair</button>

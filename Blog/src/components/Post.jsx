@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { useDeletePost } from '../hooks/useDeletePost'
 
 
-
 const Post = ({post, myPost = null}) => {
 
   const navigate = useNavigate();
@@ -24,22 +23,32 @@ const Post = ({post, myPost = null}) => {
 
   }
 
-
   return (
     <div className={styles.postContainer}>
         <img src={post.image} alt={post.title} />
         <h1>{post.title}</h1>
-        <p><b>Criado por <span>{post.createdBy}</span></b></p>
-        {post.tagsArr.map((tag) => (
-            <span key={tag}>#{tag}</span>
-        ))}
-        <button onClick={handleSinglePost}>Ler post</button>
-        {myPost &&
-          <div>
-            <button onClick={handleEditPost}>Editar post</button>
-            <button onClick={handleDelete}>Deletar post</button>
-          </div>
-        }
+
+        <div className={styles.postDetails}>
+          
+          <p><span>{post.createdBy}</span></p>
+
+          <ul>
+            {post.tagsArr.map((tag) => (
+              <li key={tag}>#{tag}</li>
+            ))}
+          </ul>
+
+          <button onClick={handleSinglePost}>Ler post</button>
+
+          {myPost &&
+            <div>
+              <button onClick={handleEditPost}>Editar post</button>
+              <button onClick={handleDelete}>Deletar post</button>
+            </div>
+          } 
+        </div>
+
+
 
     </div>
   )

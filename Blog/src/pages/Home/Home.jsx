@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import styles from "./Home.module.css"
 import { useAuthValue } from '../../context/AuthContext'
 import Post from '../../components/Post';
+
+
 const Home = () => {
   
   const [query, setQuery]                       = useState('');
@@ -18,8 +20,6 @@ const Home = () => {
 
     
     navigate('/post/search/?q='+ query)    //leva ao componente search. está assim porque está sem css
-
-    // getPosts('tagsArr', 'array-contains', query)
     
   }
 
@@ -29,19 +29,22 @@ const Home = () => {
 
   return (
     <div>
-        <h1>Home</h1>
-        <p>Confiras nossos novos posts</p>
-        <form onSubmit={handleSubmit}>
+        <div className="headerComponents">
+          <h1>Home</h1>
+          <p>Confiras nossos novos posts</p>
+        </div>
+
+        
+        <form onSubmit={handleSubmit} className={styles.searchTagsHome}>
           <input 
             type="text" 
             placeholder='Ou pesquise por tags...'
             value={query}
             onChange={((e) => setQuery(e.target.value))}
           />
-          <button>Pesquisar</button>
-        </form>
+           <button color='primary'>Pesquisar</button>
 
-        <h2>Posts...</h2>
+        </form>
 
         {posts && posts.length == 0 && !loading &&
           <div>
@@ -52,7 +55,7 @@ const Home = () => {
 
         {loading && 
           <>
-            <h1>Carregando...</h1>
+            <h1 className={styles.loadingPost}>Carregando...</h1>
           </>
         }
         {error && 
