@@ -89,7 +89,7 @@ const CreatePost = () => {
               value={title}
             />
           </label>
-          <br/>
+
           <label>
             <span>URL da imagem</span>
             <input 
@@ -101,7 +101,7 @@ const CreatePost = () => {
               value={image}
             />
           </label>
-          <br/>
+
           <label>
             <span>Body</span>
             <textarea
@@ -113,7 +113,7 @@ const CreatePost = () => {
               >
             </textarea>
           </label>
-          <br/>
+          
           <label>
             <span>Tags das imagens</span>
             <input 
@@ -125,6 +125,7 @@ const CreatePost = () => {
               value={tags}
             />
           </label>
+
           <button className='btn'>Cadastrar</button>
             {response.error && 
               <p className='error'>{response.error}</p>

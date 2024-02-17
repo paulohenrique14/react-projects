@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useQuery } from '../../hooks/useQuery'
-import Post from '../../components/Post';
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 import { useEdit } from '../../hooks/useEdit';
+import styles from './EditPost.module.css'
+import { createLogger } from 'vite';
 
 const EditPost = () => {
 
@@ -23,10 +24,7 @@ const EditPost = () => {
     const search = query.get('q');
 
     useEffect(() => {
-
         getPosts('id', '==', search);
-        
-        
     },[])
 
     useEffect(() => {
@@ -38,10 +36,9 @@ const EditPost = () => {
             
             const txtTags = posts[0].tagsArr.join(', ');
             setTags(txtTags)
+
         }
     },[posts])
-
-
 
     const handleUpdatePost = (e) => {
         e.preventDefault();
@@ -77,54 +74,60 @@ const EditPost = () => {
 
   return (
     <div>
-        <h1>Edite o post</h1>
-        <p>Altere os dados como desejar!</p>
+
+        <div className="headerComponents">
+            <h1>Edite o post</h1>
+            <p>Altere os dados como desejar!</p>
+        </div>
 
         {loading &&
             <h2>Carregando...</h2>
         }
         {posts &&
             posts.map((post) => (
-                <div key={post.id}>
+                <div key={post.id} className={styles.containerEditPost}>
                     <form onSubmit={handleUpdatePost}>
+                        <label>
+                            <span>Título</span>
+                            <input 
+                                type="text" 
+                                name="title"
+                                id='title'
+                                defaultValue={title} 
+                                onChange={((e) => setTitle(e.target.value))}
+                            />
+                        </label>
+                        <label>
+                            <span>Descrição</span>
+                            <textarea 
+                                name="body" 
+                                id="body" 
+                                defaultValue={body}
+                                onChange={((e) => setBody(e.target.value))}
+                            />
+                        </label>
 
-                        <input 
-                            type="text" 
-                            name="title"
-                            id='title'
-                            defaultValue={title} 
-                            onChange={((e) => setTitle(e.target.value))}
-                        />
-
-                        <textarea 
-                            name="body" 
-                            id="body" 
-                            defaultValue={body}
-                            onChange={((e) => setBody(e.target.value))}
-                        />
-
-                        <div className="img">
+                        <label>
+                            <span>URL da imagem</span>
                             <input 
                                 type="text" 
                                 name="image" 
                                 id="image" 
-                                defaultValue={image}
+                                defaultValue={image}                                    
                                 onChange={((e) =>setImage(e.target.value))}
                             />
+                        </label>
 
-                            <img 
-                                src={image} 
-                                alt={title} 
-                            
-                            />
-                        </div>
-
-                        <input 
-                            type="text" 
-                            name="tags" 
-                            id="tags" 
-                            defaultValue={post.tagsArr}
+                        <label>
+                            <span>Tags</span>
+                            <input 
+                                type="text" 
+                                name="tags" 
+                                id="tags" 
+                                defaultValue={post.tagsArr}
                         />
+                        </label>
+
 
                         <button>Salvar alterações</button>
                         {errorMessage &&
