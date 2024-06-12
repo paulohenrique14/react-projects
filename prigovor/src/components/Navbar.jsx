@@ -9,15 +9,10 @@ import { useSelector } from 'react-redux'
 
 const Navbar = () => {
 
-    const user = useSelector(state => state.user)
+    const user     = useSelector(state => state.user)
     const {logout} = useAuthentication()
-    
-    console.log('navbar')
-    console.log(user) 
 
-    const handleLogout = async() => {
-        await logout()
-    }
+    console.log(user) 
 
   return (
     <nav className='sticky top-0 left-0 w-full bg-primary text-white flex justify-between items-center px-10 py-5'>
@@ -52,7 +47,7 @@ const Navbar = () => {
                         <NavLink to={'/post/myposts'}className={({isActive}) => (isActive ? styles.active : '')}>Meus Posts</NavLink>
                     </li>
                     <li>
-                        <button onClick={handleLogout}>Sair</button>
+                        <button onClick={logout}>Sair</button>
                     </li>
                     
                 </>

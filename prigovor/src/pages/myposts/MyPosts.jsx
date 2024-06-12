@@ -12,16 +12,22 @@ const MyPosts = () => {
 
     useEffect(() => {
         getPosts('userID', '==', user.userId)
+        //getPosts('uid', '==', '0ddLBmNcK03NAGudn0Ku');
       }, [])
 
   return (
     <div className='flex justify-center flex-col items-center mt-10'>
         <h1 className='text-6xl'>Meus posts</h1>
         <div className='p-10  flex justify-center items-center flex-col gap-5'>
+          
         {posts.length > 0 &&
           posts.map((post) => (
-              <Posts post={post}/>
+            <Posts post = {post} modify = {true} />
           ))
+        }
+
+        {posts.length < 1 &&
+        <p>comece a postar agora!</p>
         }
         </div>
     </div>

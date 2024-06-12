@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
 import CreatePost from './pages/createpost/CreatePost';
+import EditPost from './pages/editpost/EditPost';
 
 //redux for user verification
 import {  useSelector } from 'react-redux';
@@ -35,6 +36,7 @@ function App() {
           <Route path = '/post/createpost' element ={<CreatePost/>}/>
           <Route path = '/post/myposts' element ={<MyPosts/>} />
           <Route path = '/about' element = {<About />} />
+          <Route path = '/post/edit/:id' element = {<EditPost />} />
         </Routes>
       </BrowserRouter>
 

@@ -19,9 +19,8 @@ export const useAuthentication = () => {
 
         try {
 
-            const {user} = await createUserWithEmailAndPassword(auth, data.email, data.password);
-            
- 
+            const {user} = await createUserWithEmailAndPassword(auth, data.email, data.password)
+
             await updateProfile(user, {displayName: data.name, id: auth})
 
             navigate('/')
@@ -42,29 +41,22 @@ export const useAuthentication = () => {
         try {
 
             const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)   
-            console.log('logado') 
-
-            const user = userCredential.user;
+            const user           = userCredential.user;
 
             navigate('/')
-
-
         } catch (error) {
-
             setError(error.message)
             console.log(error.message)
             console.log('deu erro')
-
         }
-
-        setLoading(false)
-        
+        setLoading(false)    
     }
 
     const logout = async() => {
         try {
-            await signOut(auth);
             
+            await signOut(auth)
+
         } catch (error) {
             setError(error.message)
             console.log(error.message)
