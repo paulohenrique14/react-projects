@@ -9,65 +9,63 @@ import {useSelector } from 'react-redux';
 
 const EditPost = () => {
 
-    const { id } = useParams();
+    const { id } = useParams(); 
 
-    const [title, setTitle]            = useState('');
-    const [body, setBody]              = useState('');
-    const [image, setImage]            = useState('');
-    const [tags, setTags]              = useState([]);
+    const [title, setTitle]             = useState('');
+    const [body, setBody]               = useState('');
+    const [image, setImage]             = useState('');
+    const [tags, setTags]               = useState([]);
     const [screenError, setScreenError] = useState('');
 
     const userID = useSelector(state => state.user.user.userId)
 
     const {getPosts, posts, loading} = useGetPosts('/posts')
 
-    const {addPost, error} = useHandlePost('posts')
+    const {editPost, error} = useHandlePost('/posts')
 
     useEffect(() => {
-        //getPosts('title', '==', 'Estou de volta!');//id)
         getPosts('id', '==', id);
-    }, [])
+        }, [])
 
-    // useEffect(() => {
-    //     console.log(posts)
-    //     if (posts.length > 0) {
-    //         setTitle(posts[0].title)
-    //         console.log(posts[0].title)
-    //     }
-    // }, [posts])
-    
+    useEffect(() => {
+        if (posts.length > 0) {
+            setTitle(posts[0].title);
+            setBody(posts[0].body);
+            setTags(posts[0].tagsArr);
+            setImage(posts[0].image);
+        }
+    }, [posts])
+
     const handlePost = (e) => {
-        e.preventDefault()
-        console.log(posts) 
+        e.preventDefault() 
+        setScreenError('')
 
+        if (image === '' || tags === '' || body === '' || title === ''){
+            setScreenError('Favor preencher todos os campos corretamente');
+            setTimeout(() => {
+                setScreenError('')
+            }, 2000)
+        }
 
-        // setScreenError('')
+        if (error !== '') {
+            setScreenError(error.message)
+            return
+        }
 
-        // if (image === '' || tags === '' || body === '' || title === ''){
-        //     setScreenError('Favor preencher todos os campos corretamente');
-        //     setTimeout(() => {
-        //         setScreenError('')
-        //     }, 2000)
-        // }
+        const tagsArr = tags.toString().toLowerCase().split(',').map(tag => tag.trim())
 
-        // if (error !== '') {
-        //     setScreenError(error.message)
-        //     return
-        // }
+        const postId = posts[0].id;
 
-        // const tagsArr = tags.toLowerCase().split(',').map(tag => tag.trim())
+        const post = {
+            title,
+            body,
+            image,
+            tagsArr,
+            postId
+            
+        }
 
-        // const post = {
-        //     title,
-        //     body,
-        //     image,
-        //     tagsArr,
-        //     userID
-        // }
-
-        // // console.log(post)
-        // addPost(post) //edicao
-
+         editPost(postId, post) 
     }
 
     return (

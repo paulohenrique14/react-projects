@@ -1,6 +1,6 @@
 import {useState, useEffect, useReducer} from 'react'
 import {db} from '../firebase/config'
-import { collection, addDoc, Timestamp, updateDoc, doc } from 'firebase/firestore'
+import { collection, addDoc, Timestamp, updateDoc, doc, deleteDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 
 export const useHandlePost = (docCollection) => {
@@ -38,18 +38,39 @@ export const useHandlePost = (docCollection) => {
         
     }
 
-    const editPost = async(uid, data) => {
+    const editPost = async(postId, data) => {
         
         setLoading(true)
         setError('')
         try {
-            const postRef = doc(db, docCollection, uid)
+            const postRef = doc(db, docCollection, postId)
+
+            console.log(data)
             
             await updateDoc(postRef, data)
+
+            navigate('/post/myposts')
+            
 
         } catch (error) {
             setError(error)
             console.log(error)            
+        }
+    }
+
+    const deletePost = async(postId, data) => {
+        setLoading(false)
+        setError('')
+
+        try {
+            const postRef = doc(db, docCollection, postId)
+
+            await deleteDoc(postRef, data)
+
+            navigate('/post/myposts')            
+        } catch (error) {
+            setError(error.message)
+            
         }
     }
 

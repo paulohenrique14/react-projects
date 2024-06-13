@@ -19,7 +19,6 @@ const MyPosts = () => {
     <div className='flex justify-center flex-col items-center mt-10'>
         <h1 className='text-6xl'>Meus posts</h1>
         <div className='p-10  flex justify-center items-center flex-col gap-5'>
-          
         {posts.length > 0 &&
           posts.map((post) => (
             <Posts post = {post} modify = {true} />
