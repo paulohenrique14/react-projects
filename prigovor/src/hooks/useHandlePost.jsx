@@ -78,6 +78,7 @@ export const useHandlePost = (docCollection) => {
         addPost,
         loading,
         error,
-        editPost
+        editPost,
+        deletePost
     }
 }

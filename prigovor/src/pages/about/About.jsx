@@ -6,13 +6,12 @@ import github from '../../assets/github.png'
 const About = () => {
   return (
     <div className='flex flex-col justify-between items-center p-5'>
-        <div className='w-1/2 flex flex-col items-center gap-5 mt-10  bg-slate-100 border-2 p-4'>
+        <div className='w-2/3 h- flex flex-col items-center gap-5 mt-10  bg-slate-100 border-2 p-4'>
             <h1 className='text-6xl'>Prigovor</h1>
             <p>
                 O projeto oferece aos usuários a capacidade de criar e gerenciar suas contas de forma segura, cada uma 
-                acompanhada por um token de autenticação exclusivo. Os usuários podem facilmente criar, editar e visualizar
-                posts. Além disso, a plataforma permite a personalização do conteúdo criado pelos usuários, garantindo 
-                flexibilidade e controle sobre suas contribuições.
+                acompanhada por um token de autenticação exclusivo. Os usuários podem facilmente criar, editar, visualizar e apagar os
+                posts. 
             </p>
             <p>desenvolvido com as seguintes tecnologias:</p>
             <ul>

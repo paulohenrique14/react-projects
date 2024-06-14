@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Children } from 'react'
 
 const BACKGROUND_STYLE = {
     position:'fixed',
@@ -15,11 +15,14 @@ const MODAL_STYLE = {
     top: '50%',
     transform: 'translate(-50%, -50%)',
     left: '50%',
-    padding: '150px',
+    padding: '20px',
     backgroundColor: '#fff',
     borderRadius: '10px',
-    display: 'flex',
-    flexDirection: 'Column'
+     display: 'flex',
+    flexDirection: 'Column',
+    justifyContent: 'space-between',
+
+    alignItems: 'center'
 
 }
 
@@ -27,18 +30,13 @@ const MODAL_BUTTON_STYLE = {
     border: '4px solid red'
 }
 
-export default function Modal({isOpen}) {
+export default function Modal({isOpen, children}) {
     if (isOpen) {
         return (
             <div style={BACKGROUND_STYLE}>
                 <div style={MODAL_STYLE}>
-                    <h1>Atenção</h1>
-                    <p>Deseja deletar o post?</p>
-                    <div style ={MODAL_BUTTON_STYLE}>
-                        <button>Não</button>
-                        <button>Confirmar</button>
-                    </div>
-                    
+                <h1 className='text-xl'>Atenção</h1>
+                    {children }  
                 </div>
             </div>
         )
